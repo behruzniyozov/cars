@@ -26,9 +26,8 @@ urlpatterns = [
     path('', RedirectView.as_view(url='cars/'), name='home'),
 ]
 
-if settings.DEBUG:
-    # For media files
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
-    # For static files - CORRECT WAY
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+static_media_urls = (
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) +
+    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)
+urlpatterns += static_media_urls
